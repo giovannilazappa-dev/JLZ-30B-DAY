@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JLZ — B-Day 🌾</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Space+Grotesk:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --terra: #C2622A;
+    --terra-light: #E8956A;
+    --terra-dark: #8B3D18;
+    --gold: #D4A853;
+    --gold-light: #F0D08A;
+    --cream: #FAF5E9;
+    --olive: #6B7B4A;
+    --olive-light: #9AAD6E;
+    --sky: #7BB4CC;
+    --deep: #1A1208;
+    --warm-white: #FDF8F0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--cream); color: var(--deep); font-family: 'Cormorant Garamond', serif; overflow-x: hidden; }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 0%, rgba(212,168,83,0.18) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 80% at 0% 100%, rgba(194,98,42,0.12) 0%, transparent 50%),
+      radial-gradient(ellipse 60% 60% at 100% 50%, rgba(107,123,74,0.10) 0%, transparent 50%),
+      var(--cream);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; padding: 3rem 2rem; position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C2622A' fill-opacity='0.04'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+  .olivo-left, .olivo-right { position: absolute; bottom: 0; opacity: 0.15; pointer-events: none; }
+  .olivo-left { left: -20px; transform: scaleX(-1); }
+  .olivo-right { right: -20px; }
+
+  .badge {
+    display: inline-block; background: var(--terra); color: var(--cream);
+    font-family: 'Space Grotesk', sans-serif; font-size: 0.7rem; font-weight: 500;
+    letter-spacing: 0.2em; text-transform: uppercase; padding: 0.4rem 1.2rem;
+    border-radius: 2rem; margin-bottom: 2rem; animation: fadeDown 0.8s ease both;
+  }
+  .hero-name {
+    font-family: 'Playfair Display', serif; font-size: clamp(5rem, 18vw, 12rem);
+    font-weight: 700; line-height: 0.85; color: var(--terra-dark);
+    letter-spacing: -0.02em; animation: fadeUp 0.9s ease 0.1s both;
+  }
+  .hero-name span {
+    display: block; font-style: italic; color: var(--gold);
+    font-size: 0.55em; line-height: 1.4; letter-spacing: 0.05em;
+  }
+  .hero-sub {
+    font-family: 'Cormorant Garamond', serif; font-size: clamp(1.1rem, 3vw, 1.5rem);
+    font-style: italic; color: var(--terra); margin: 1.5rem 0 2.5rem;
+    animation: fadeUp 0.9s ease 0.2s both;
+  }
+  .hero-date {
+    font-family: 'Space Grotesk', sans-serif; font-size: 0.85rem; font-weight: 300;
+    letter-spacing: 0.15em; text-transform: uppercase; color: var(--olive);
+    margin-bottom: 3rem; animation: fadeUp 0.9s ease 0.3s both;
+  }
+  .birthday-notice {
+    display: inline-flex; align-items: center; gap: 0.75rem;
+    background: linear-gradient(135deg, rgba(212,168,83,0.15), rgba(194,98,42,0.1));
+    border: 1px solid rgba(212,168,83,0.4); border-radius: 1rem;
+    padding: 0.9rem 1.6rem; margin-bottom: 3rem;
+    animation: fadeUp 0.9s ease 0.35s both; max-width: 420px; text-align: center;
+  }
+  .birthday-notice .notice-icon { font-size: 1.4rem; flex-shrink: 0; }
+  .birthday-notice .notice-text { font-family: 'Cormorant Garamond', serif; font-size: 0.95rem; font-style: italic; color: var(--terra-dark); line-height: 1.5; }
+  .birthday-notice .notice-text strong { font-family: 'Space Grotesk', sans-serif; font-style: normal; font-size: 0.78rem; font-weight: 500; letter-spacing: 0.05em; color: var(--terra); display: block; margin-bottom: 0.2rem; text-transform: uppercase; }
+
+  .scroll-hint {
+    position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+    color: var(--terra-light); font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase;
+    animation: bounce 2s ease-in-out infinite;
+  }
+  .scroll-hint svg { width: 20px; opacity: 0.6; }
+
+  /* ─── SECTIONS ─── */
+  section { padding: 5rem 2rem; max-width: 900px; margin: 0 auto; }
+  .section-label {
+    font-family: 'Space Grotesk', sans-serif; font-size: 0.7rem; font-weight: 500;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--terra-light);
+    margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.75rem;
+  }
+  .section-label::after { content: ''; display: block; height: 1px; width: 3rem; background: var(--terra-light); opacity: 0.5; }
+  h2 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 400; font-style: italic; color: var(--terra-dark); margin-bottom: 1.5rem; }
+  p { font-size: 1.15rem; line-height: 1.8; color: #4A3520; }
+
+  .divider { display: flex; align-items: center; justify-content: center; gap: 1rem; margin: 0; color: var(--gold); font-size: 1.2rem; opacity: 0.6; }
+  .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: linear-gradient(to right, transparent, var(--gold), transparent); }
+
+  /* ─── COUNTDOWN ─── */
+  .countdown-section {
+    background: var(--terra-dark); color: var(--cream); padding: 5rem 2rem;
+    text-align: center; position: relative; overflow: hidden;
+  }
+  .countdown-section::before {
+    content: '30'; position: absolute; font-family: 'Playfair Display', serif;
+    font-size: 40vw; font-weight: 700; color: rgba(255,255,255,0.03);
+    top: 50%; left: 50%; transform: translate(-50%, -50%); pointer-events: none; white-space: nowrap;
+  }
+  .countdown-section .section-label { color: var(--gold-light); justify-content: center; }
+  .countdown-section .section-label::after { background: var(--gold-light); }
+  .countdown-section h2 { color: var(--cream); }
+  .countdown-grid { display: flex; justify-content: center; gap: clamp(1rem, 4vw, 3rem); margin-top: 3rem; flex-wrap: wrap; }
+  .countdown-unit { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
+  .count-num { font-family: 'Playfair Display', serif; font-size: clamp(3rem, 10vw, 5.5rem); font-weight: 700; color: var(--gold); line-height: 1; min-width: 2.5ch; text-align: center; }
+  .count-label { font-family: 'Space Grotesk', sans-serif; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(250,245,233,0.6); }
+  .count-sep { font-family: 'Playfair Display', serif; font-size: 3rem; color: var(--gold); opacity: 0.4; align-self: center; margin-top: -0.5rem; }
+
+  /* ─── MAP ─── */
+  .map-section { padding: 5rem 2rem; max-width: 900px; margin: 0 auto; }
+  .map-wrap { border-radius: 1rem; overflow: hidden; border: 3px solid var(--gold); margin-top: 2rem; box-shadow: 0 20px 60px rgba(194,98,42,0.15); }
+  .map-wrap iframe { width: 100%; height: 380px; display: block; border: none; filter: sepia(20%) saturate(1.1); }
+  .map-info { background: var(--terra-dark); color: var(--cream); padding: 1.5rem 2rem; display: flex; flex-wrap: wrap; gap: 1.5rem; align-items: center; justify-content: space-between; }
+  .map-info-text { flex: 1; min-width: 200px; }
+  .map-info-text h3 { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.4rem; color: var(--gold); margin-bottom: 0.3rem; }
+  .map-info-text p { font-family: 'Space Grotesk', sans-serif; font-size: 0.8rem; color: rgba(250,245,233,0.7); line-height: 1.5; }
+  .map-cta { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--gold); color: var(--terra-dark); font-family: 'Space Grotesk', sans-serif; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.75rem 1.5rem; border-radius: 2rem; text-decoration: none; transition: background 0.2s, transform 0.2s; white-space: nowrap; }
+  .map-cta:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+  /* ─── RSVP ─── */
+  .rsvp-section {
+    background:
+      radial-gradient(ellipse 80% 80% at 50% 0%, rgba(212,168,83,0.12) 0%, transparent 60%),
+      var(--warm-white);
+    padding: 6rem 2rem; text-align: center;
+  }
+  .rsvp-section .section-label { justify-content: center; }
+  .rsvp-section .section-label::after { background: var(--terra-light); }
+
+  .rsvp-box {
+    max-width: 520px;
+    margin: 2.5rem auto 0;
+    background: white;
+    border-radius: 1.5rem;
+    padding: 3rem 2.5rem;
+    border: 1px solid rgba(194,98,42,0.12);
+    box-shadow: 0 30px 80px rgba(194,98,42,0.10), 0 0 0 1px rgba(212,168,83,0.08);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .rsvp-box .rsvp-emoji {
+    font-size: 3rem;
+    line-height: 1;
+  }
+
+  .rsvp-box .rsvp-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-style: italic;
+    color: #4A3520;
+    line-height: 1.7;
+    text-align: center;
+    max-width: 360px;
+  }
+
+  .rsvp-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    background: var(--terra);
+    color: var(--cream);
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem;
+    font-style: italic;
+    text-decoration: none;
+    padding: 1rem 2.5rem;
+    border-radius: 3rem;
+    transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    letter-spacing: 0.02em;
+    width: 100%;
+    text-align: center;
+  }
+  .rsvp-cta-btn:hover {
+    background: var(--terra-dark);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 35px rgba(194,98,42,0.35);
+  }
+  .rsvp-cta-btn:active { transform: scale(0.98); }
+
+  .rsvp-hint {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    color: var(--terra-light);
+    opacity: 0.8;
+  }
+
+  /* ─── FOOTER ─── */
+  footer { text-align: center; padding: 3rem 2rem; background: var(--deep); color: rgba(250,245,233,0.5); font-family: 'Space Grotesk', sans-serif; font-size: 0.75rem; letter-spacing: 0.1em; }
+  footer span { color: var(--gold); }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeDown { from { opacity: 0; transform: translateY(-12px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes bounce { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(8px); } }
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .branch-deco { display: block; margin: 2rem auto 0; opacity: 0.35; width: 120px; }
+</style>
+</head>
+<body>
+
+<!-- ─── HERO ─── -->
+<section class="hero">
+  <svg class="olivo-right" width="200" height="500" viewBox="0 0 200 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="120" cy="60" rx="18" ry="30" fill="#6B7B4A" transform="rotate(-20 120 60)"/>
+    <ellipse cx="100" cy="120" rx="14" ry="26" fill="#6B7B4A" transform="rotate(15 100 120)"/>
+    <ellipse cx="140" cy="150" rx="16" ry="28" fill="#6B7B4A" transform="rotate(-30 140 150)"/>
+    <ellipse cx="90" cy="200" rx="12" ry="24" fill="#9AAD6E" transform="rotate(10 90 200)"/>
+    <ellipse cx="150" cy="220" rx="14" ry="22" fill="#6B7B4A" transform="rotate(-15 150 220)"/>
+    <ellipse cx="110" cy="270" rx="13" ry="25" fill="#9AAD6E" transform="rotate(25 110 270)"/>
+    <ellipse cx="145" cy="310" rx="11" ry="20" fill="#6B7B4A" transform="rotate(-10 145 310)"/>
+    <ellipse cx="95" cy="340" rx="15" ry="22" fill="#9AAD6E" transform="rotate(20 95 340)"/>
+    <path d="M120 0 Q115 200 105 500" stroke="#8B6914" stroke-width="3" fill="none" stroke-linecap="round"/>
+  </svg>
+  <svg class="olivo-left" width="200" height="500" viewBox="0 0 200 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="120" cy="60" rx="18" ry="30" fill="#6B7B4A" transform="rotate(-20 120 60)"/>
+    <ellipse cx="100" cy="120" rx="14" ry="26" fill="#6B7B4A" transform="rotate(15 100 120)"/>
+    <ellipse cx="140" cy="150" rx="16" ry="28" fill="#6B7B4A" transform="rotate(-30 140 150)"/>
+    <ellipse cx="90" cy="200" rx="12" ry="24" fill="#9AAD6E" transform="rotate(10 90 200)"/>
+    <ellipse cx="150" cy="220" rx="14" ry="22" fill="#6B7B4A" transform="rotate(-15 150 220)"/>
+    <ellipse cx="110" cy="270" rx="13" ry="25" fill="#9AAD6E" transform="rotate(25 110 270)"/>
+    <ellipse cx="145" cy="310" rx="11" ry="20" fill="#6B7B4A" transform="rotate(-10 145 310)"/>
+    <ellipse cx="95" cy="340" rx="15" ry="22" fill="#9AAD6E" transform="rotate(20 95 340)"/>
+    <path d="M120 0 Q115 200 105 500" stroke="#8B6914" stroke-width="3" fill="none" stroke-linecap="round"/>
+  </svg>
+
+  <div class="badge">b-day</div>
+  <div class="hero-name">
+    JLZ
+    <span>b-day</span>
+  </div>
+  <div class="hero-sub">Una serata in Puglia, sotto le stelle d'estate</div>
+  <div class="hero-date">— 26 Giugno 2026 —</div>
+
+  <div class="birthday-notice">
+    <div class="notice-icon">🎂</div>
+    <div class="notice-text">
+      <strong>Il compleanno è il 25 Giugno!</strong>
+      Festeggiamo il 26 Giugno — vieni a celebrare questo momento speciale con noi! 🥳
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+    Scorri
+  </div>
+</section>
+
+<!-- ─── DIVIDER ─── -->
+<div style="padding: 0 2rem;"><div class="divider">🌾</div></div>
+
+<!-- ─── INFO ─── -->
+<section class="reveal">
+  <div class="section-label">La serata</div>
+  <h2>Una notte pugliese da ricordare</h2>
+  <p>
+    Il b-day si celebra solo una volta. Vieni a festeggiare con JLZ tra i profumi del rosmarino,
+    birre ghiacciate, drink freschi e la luce dorata di un tramonto pugliese.
+    Una serata di cibo, risate e musica in uno degli angoli più belli della Puglia.
+  </p>
+  <svg class="branch-deco" viewBox="0 0 120 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M5 20 Q30 5 60 20 Q90 35 115 20" stroke="#C2622A" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    <ellipse cx="25" cy="13" rx="7" ry="4" fill="#6B7B4A" transform="rotate(-20 25 13)"/>
+    <ellipse cx="50" cy="23" rx="6" ry="3.5" fill="#9AAD6E" transform="rotate(10 50 23)"/>
+    <ellipse cx="78" cy="28" rx="7" ry="4" fill="#6B7B4A" transform="rotate(-15 78 28)"/>
+    <ellipse cx="98" cy="18" rx="6" ry="3.5" fill="#9AAD6E" transform="rotate(5 98 18)"/>
+    <circle cx="60" cy="20" r="3" fill="#D4A853"/>
+  </svg>
+</section>
+
+<!-- ─── COUNTDOWN ─── -->
+<div class="countdown-section">
+  <div class="section-label">Mancano ancora</div>
+  <h2>Il conto alla rovescia</h2>
+  <div class="countdown-grid">
+    <div class="countdown-unit"><div class="count-num" id="days">00</div><div class="count-label">Giorni</div></div>
+    <div class="count-sep">:</div>
+    <div class="countdown-unit"><div class="count-num" id="hours">00</div><div class="count-label">Ore</div></div>
+    <div class="count-sep">:</div>
+    <div class="countdown-unit"><div class="count-num" id="minutes">00</div><div class="count-label">Minuti</div></div>
+    <div class="count-sep">:</div>
+    <div class="countdown-unit"><div class="count-num" id="seconds">00</div><div class="count-label">Secondi</div></div>
+  </div>
+</div>
+
+<!-- ─── MAP ─── -->
+<section class="map-section reveal">
+  <div class="section-label">Dove festeggeremo</div>
+  <h2>Asfodelo Agriturismo</h2>
+  <p>Strada Provinciale 157 — Altamura (BA), Puglia<br>
+  <span style="font-size:0.95rem; color: var(--olive); font-style: italic;">In mezzo alla natura, lontani dal rumore, vicini al cielo.</span></p>
+  <div class="map-wrap">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3017.260349054696!2d16.57113547603333!3d40.86616037137085!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134787d1748a9e3b%3A0x42c8469df8c4db62!2sAsfodelo%20-%20Luoghi%20da%20Vivere!5e0!3m2!1sit!2sit!4v1781172557795!5m2!1sit!2sit"
+      allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+    <div class="map-info">
+      <div class="map-info-text">
+        <h3>Asfodelo Agriturismo</h3>
+        <p>SP 157 s.n. — 70022 Altamura (BA)<br>Tel: +39 329 973 6327</p>
+      </div>
+      <a class="map-cta" href="https://maps.google.com/?q=Asfodelo+Ristorante+Altamura" target="_blank">
+        📍 Apri in Maps
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── RSVP ─── -->
+<div class="rsvp-section">
+  <div class="section-label">Conferma la tua presenza</div>
+  <h2>Ci sarai? 🍺</h2>
+  <p style="max-width:500px; margin: 0 auto; font-style: italic;">
+    Facci sapere se puoi essere dei nostri — abbiamo bisogno di organizzarci e non vediamo l'ora!
+  </p>
+
+  <div class="rsvp-box">
+    <div class="rsvp-emoji">🌾</div>
+    <p class="rsvp-tagline">
+      Compila il form in un minuto e dicci se ci sarai.<br>
+      JLZ non vede l'ora di festeggiarti insieme!
+    </p>
+    <a
+      class="rsvp-cta-btn"
+      href="https://docs.google.com/forms/d/e/1FAIpQLSf6qk5ySYhbRsMiuuuCcQFHotBbSOdYKmbpjuA3bqBZCRExxw/viewform?usp=header"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Ci sarai? — Conferma qui 🥂
+    </a>
+    <span class="rsvp-hint">Si apre Google Forms — ci vuole meno di un minuto</span>
+  </div>
+</div>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  Con amore, per il <span>b-day di JLZ</span> &nbsp;·&nbsp; Puglia Estate 2026
+</footer>
+
+<script>
+  const eventDate = new Date('2026-06-26T20:00:00');
+  function pad(n) { return String(n).padStart(2, '0'); }
+  function updateCountdown() {
+    const diff = eventDate - new Date();
+    if (diff <= 0) { ['days','hours','minutes','seconds'].forEach(id => document.getElementById(id).textContent = '00'); return; }
+    document.getElementById('days').textContent    = pad(Math.floor(diff / 86400000));
+    document.getElementById('hours').textContent   = pad(Math.floor((diff % 86400000) / 3600000));
+    document.getElementById('minutes').textContent = pad(Math.floor((diff % 3600000) / 60000));
+    document.getElementById('seconds').textContent = pad(Math.floor((diff % 60000) / 1000));
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
